@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    // Route::get('/stories', [StoriesController::class, 'index'])->name('stories.index');
+    // Route::get('/stories/{story}', [StoriesController::class, 'show'])->name('stories.show');
+    Route::resource('stories', StoriesController::class);
+});
