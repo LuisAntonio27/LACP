@@ -14,8 +14,8 @@
                     {{ $story->body }}
                     
                     <p class="font-weight-bold">
-                        Type: {{ $story->type }}</br>
-                        Status: {{ $story->status == 1 ? 'Yes' : 'No' }}
+                        Tipo: {{ $story->type }}</br>
+                        Estatus: {{ $story->status == 1 ? 'Yes' : 'No' }}
                     </p>
                 </div>
             </div>

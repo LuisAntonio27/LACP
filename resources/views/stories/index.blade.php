@@ -11,10 +11,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>T&iacute;tulo</th>
+                                <th>Tipo</th>
+                                <th>Estatus</th>
+                                <th>Acci&oacute;n</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,7 +23,10 @@
                                     <td>{{ $story->title }}</td>
                                     <td>{{ $story->type }}</td>
                                     <td>{{ $story->status == 1 ? 'Yes' : 'No' }}</td>
-                                    <td><a href="{{ route('stories.show', [$story]) }}" class="btn btn-success">Ver</a></td>
+                                    <td>
+                                        <a href="{{ route('stories.show', [$story]) }}" class="btn btn-secondary">Ver</a>
+                                        <a href="{{ route('stories.edit', [$story]) }}" class="btn btn-primary">Editar</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -31,7 +31,7 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('stories.create');
     }
 
     /**
@@ -42,7 +42,18 @@ class StoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'required',
+            'status' => 'required'
+        ]);
+        // Story::create([
+        //     'title' => $request->title...
+        // ]);
+        // Reemplazamos la anterior instruccion por el hecho de que no podemos asignar manualmente el id del usuario y la base de datos no permite valores nulos a: user_id
+        auth()->user()->stories()->create($data);
+        return redirect()->route('stories.index')->with('status', '¡Historia creada correctamente!');
     }
 
     /**
@@ -68,7 +79,9 @@ class StoriesController extends Controller
      */
     public function edit(Story $story)
     {
-        //
+        return view('stories.edit', [
+            'story' => $story
+        ]);
     }
 
     /**
@@ -80,7 +93,16 @@ class StoriesController extends Controller
      */
     public function update(Request $request, Story $story)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'required',
+            'status' => 'required'
+        ]);
+
+        $story->update($data);
+
+        return redirect()->route('stories.index')->with('status', '¡Historia actualizada correctamente!');
     }
 
     /**
