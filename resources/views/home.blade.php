@@ -15,6 +15,8 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <a href="{{ route('stories.index') }}" class="btn btn-primary float-right">Historias</a>
                 </div>
             </div>
         </div>

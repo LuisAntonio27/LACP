@@ -5,8 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Stories') }}</div>
-
+                <div class="card-header">
+                    {{ __('Stories') }}
+                    <a href="{{ route('stories.create') }}" class="float-right">Nuevo</a>
+                </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
