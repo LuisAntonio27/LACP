@@ -104,6 +104,7 @@ class StoriesController extends Controller
      */
     public function destroy(Story $story)
     {
-        //
+        $story->delete();
+        return redirect()->route('stories.index')->with('status', '¡Historia eliminada correctamente!');
     }
 }
