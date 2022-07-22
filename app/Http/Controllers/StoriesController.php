@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoryRequest;
 use App\Models\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StoriesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Story::class, 'story');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -32,6 +37,8 @@ class StoriesController extends Controller
      */
     public function create()
     {
+        //
+        // $this->authorize('create'); // No es necesario llamar esta funcion debido al constructor que llama StoryPolicy
         $story = new Story;
         return view('stories.create', [
             'story' => $story
@@ -77,6 +84,8 @@ class StoriesController extends Controller
      */
     public function edit(Story $story)
     {
+        // Gate::authorize('edit-story', $story);
+        // $this->authorize('update', $story); // No es necesario llamar esta funcion debido al constructor que llama StoryPolicy
         return view('stories.edit', [
             'story' => $story
         ]);

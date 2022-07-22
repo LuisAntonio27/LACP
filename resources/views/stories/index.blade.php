@@ -7,7 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     {{ __('Stories') }}
-                    <a href="{{ route('stories.create') }}" class="float-right">Nuevo</a>
+                    @can('create', App\Story::class)
+                        <a href="{{ route('stories.create') }}" class="float-right">Nuevo</a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -26,13 +28,21 @@
                                     <td>{{ $story->type }}</td>
                                     <td>{{ $story->status == 1 ? 'Yes' : 'No' }}</td>
                                     <td>
-                                        <a href="{{ route('stories.show', [$story]) }}" class="btn btn-secondary">Ver</a>
-                                        <a href="{{ route('stories.edit', [$story]) }}" class="btn btn-primary">Editar</a>
-                                        <form action="{{ route('stories.destroy', [$story]) }}" method="POST" class="d-inline-block">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="btn btn-sm btn-danger">Eliminar</button>
-                                        </form>
+                                        @can('view', $story)
+                                            <a href="{{ route('stories.show', [$story]) }}" class="btn btn-secondary">Ver</a>
+                                        @endcan
+
+                                        @can('update', $story)
+                                            <a href="{{ route('stories.edit', [$story]) }}" class="btn btn-primary">Editar</a>
+                                        @endcan
+
+                                        @can('delete', $story)
+                                            <form action="{{ route('stories.destroy', [$story]) }}" method="POST" class="d-inline-block">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
